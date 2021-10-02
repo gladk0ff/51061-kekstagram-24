@@ -13,7 +13,7 @@ const getRandomFromInterval = (min, max)=> {
 getRandomFromInterval(1, 7);
 
 //Функция для проверки максимальной длины строки.
-const hasStringLength=(str, limit)=> {
+const hasStringLength= (str, limit) => {
   if (!str || !limit) {
     console.error('Не заданы параметры функции');
   }
