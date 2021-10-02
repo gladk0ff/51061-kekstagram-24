@@ -1,5 +1,5 @@
 //Функция, возвращающая случайное целое число из переданного диапазона включительно.
-function getRandomFromInterval(min, max) {
+const getRandomFromInterval = (min, max)=> {
   if (max < 0 || min < 0) {
     console.error('диапазон может быть только положительный, включая ноль.');
     return;
@@ -13,7 +13,7 @@ function getRandomFromInterval(min, max) {
 getRandomFromInterval(1, 7);
 
 //Функция для проверки максимальной длины строки.
-function hasStringLength(str, limit) {
+const hasStringLength=(str, limit)=> {
   if (!str || !limit) {
     console.error('Не заданы параметры функции');
   }
