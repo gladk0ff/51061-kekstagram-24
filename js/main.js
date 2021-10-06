@@ -67,12 +67,12 @@ const generateMockPost = (postId) => {
   const commentsArray = [...('123456878'.slice(0, getRandomFromInterval(1, 7)))];
 
   return {
-    id,
+    postId,
     url: `photos/${postId}.jpg`,
     description: commonDescription.slice(0, getRandomFromInterval(1, commonDescription.length)),
     likes: getRandomFromInterval(15, 200),
-    comments: commentsArray.map((_, index) => {
-      const commentId = `1${  index  }${postId}`;
+    comments: commentsArray.map((value, index) => {
+      const commentId = `1${index}${postId}`;
       return generateMockComment(commentId);
     }),
   };
@@ -80,7 +80,8 @@ const generateMockPost = (postId) => {
 
 // В файле main.js на основе написанных по заданию ранее вспомогательных функций напишите необходимые функции для создания массива из 25 сгенерированных объектов.
 // Каждый объект массива — описание фотографии, опубликованной пользователем.
-const mockPosts = [...'0123456789012345678901234'].map((_, index) => generateMockPost(index));
+// получение массива случайной длинны для набора комментариев
+const mockPosts = [...'0123456789012345678901234'].map((value, index) => generateMockPost(index));
 console.log(mockPosts);
 
 
