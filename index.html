@@ -139,7 +139,7 @@
 
         <!-- Просмотр изображения -->
         <div class="big-picture__img">
-          <img src="img/logo-background-3.jpg" alt="Девушка в купальнике" width="600" height="600">
+          <img class="big-picture__img-preview" src="img/logo-background-3.jpg" alt="Девушка в купальнике" width="600" height="600">
         </div>
 
         <!-- Информация об изображении. Подпись, комментарии, количество лайков -->
@@ -229,6 +229,18 @@
   <!-- Экран загрузки изображения -->
   <template id="messages">
     <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
+  </template>
+
+  <!-- Экран загрузки изображения -->
+  <template id="social__comment">
+    <li class="social__comment">
+      <img
+        class="social__picture"
+        src=""
+        alt=""
+        width="35" height="35">
+      <p class="social__text"></p>
+    </li>
   </template>
 
   <script type='module' src="js/main.js"></script>
