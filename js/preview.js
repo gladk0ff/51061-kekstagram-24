@@ -9,7 +9,7 @@ const previewComments = previewContainer.querySelector('.comments-count');
 const previewCloseButton = document.getElementById('picture-cancel');
 const previewCommentsContainer = previewContainer.querySelector('.social__comments');
 
-const commentTamplate = document.getElementById('social__comment').content;
+const commentTemplate = document.getElementById('social__comment').content;
 
 // После открытия окна спрячьте блоки счётчика комментариев .social__comment-count и загрузки новых комментариев .comments-loader,
 // добавив им класс hidden, с ними мы разберёмся позже, в другом домашнем задании.
@@ -44,7 +44,7 @@ previewCloseButton.addEventListener('click', closePreview);
  * @return HTMLElement[]
  * */
 const createComments = (comments) => comments.map((comment) => {
-  const commentHTML = commentTamplate.cloneNode(true);
+  const commentHTML = commentTemplate.cloneNode(true);
 
   const avatar = commentHTML.querySelector('.social__picture');
   avatar.src = comment.avatar;
