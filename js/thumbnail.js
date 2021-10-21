@@ -1,3 +1,5 @@
+import { showPreview } from './preview.js';
+
 /**
  * @description функция для создания миниатюр-изображений
  * @param posts - данные постов пользователей
@@ -7,6 +9,7 @@ export const createThumbnails = (posts) => {
   const thumbTamplate = document.getElementById('picture').content.querySelector('.picture');
   return posts.map((post) => {
     const thumb = thumbTamplate.cloneNode(true);
+    thumb.addEventListener('click', showPreview(post));
 
     const img = thumb.querySelector('.picture__img');
     img.src = post.url;
