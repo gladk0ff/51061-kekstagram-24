@@ -41,7 +41,7 @@ const generateMockComment = (id) => ({
 const commonDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie quam non nibh dapibus placerat. Praesent maximus rutrum felis, sed venenatis risus. In quis odio varius, porta mi eu, ullamcorper orci. Morbi quis sodales neque. Nulla at bibendum nibh. Morbi vel interdum urna, eget pellentesque elit. Donec at ligula suscipit, egestas tortor nec, cursus leo. Aenean vel nunc scelerisque, imperdiet ligula eu, finibus mi. Suspendisse dignissim mauris et leo maximus consequat.';
 const generateMockPost = (postId) => {
   // получение массива случайной длинны для набора комментариев
-  const commentsArray = [...('123456878'.slice(0, getRandomFromInterval(1, 7)))];
+  const commentsArray = [...('12345687812345678'.slice(0, getRandomFromInterval(1, 17)))];
 
   return {
     postId,
