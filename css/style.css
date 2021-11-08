@@ -889,6 +889,8 @@ main {
   margin: 0;
   padding: 0;
   padding-top: 20px;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .social__comment {
