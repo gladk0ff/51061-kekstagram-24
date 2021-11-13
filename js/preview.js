@@ -95,6 +95,7 @@ overlay.addEventListener('click', (event) => {
 });
 previewCloseButton.addEventListener('click', closePreview);
 
+
 /**
  * @desc
  *  обработчик клика по миниатюре для показа превью (модального окна),

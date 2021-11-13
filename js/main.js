@@ -1,7 +1,7 @@
 import * as utils from './utils.js';
 import {generateMockPost} from './mock-generator.js';
 import {createThumbnails} from './thumbnail.js';
-import './form.js';
+import './form/form.js';
 
 utils.getRandomFromInterval(1, 7);
 utils.hasStringLength('Ололо', 3);
