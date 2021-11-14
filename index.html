@@ -128,7 +128,7 @@
                 </fieldset>
 
                 <!-- Кнопка для отправки данных на сервер -->
-                <button type="click" class="img-upload__submit" id="upload-submit">Опубликовать</button>
+                <button type="submit" class="img-upload__submit" id="upload-submit">Опубликовать</button>
               </div>
             </div>
           </form>
@@ -185,6 +185,7 @@
         <button type="reset" class="big-picture__cancel  cancel" id="picture-cancel">Закрыть</button>
       </div>
     </section>
+
   </main>
 
   <footer class="page-footer  container">
@@ -201,6 +202,16 @@
       </ul>
     </div>
   </footer>
+
+  <div class="errors-container overlay visually-hidden">
+    <!-- Кнопка для выхода из полноэкранного просмотра изображения -->
+
+    <div class="error">
+      <button type="reset" class="errors__cancel  cancel" id="errors__cancel">Закрыть</button>
+      <h1 class="error__title">Ошибка :</h1>
+      <p class="error__content"></p>
+    </div>
+  </div>
 
   <!-- Шаблон изображения случайного пользователя -->
   <template id="picture">
