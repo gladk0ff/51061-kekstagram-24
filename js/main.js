@@ -1,18 +1,20 @@
 import * as utils from './utils.js';
-import {generateMockPost} from './mock-generator.js';
 import {createThumbnails} from './thumbnail.js';
 import './form/form.js';
+import {loadPosts} from './api.js';
+import {showError} from './errors.js';
 
 utils.getRandomFromInterval(1, 7);
 utils.hasStringLength('Ололо', 3);
 
-// создания массива из 25 сгенерированных объектов.
-// Каждый объект массива — описание фотографии, опубликованной пользователем.
-// получение массива случайной длинны для набора комментариев
-const mockPosts = [...'1234567891234567891234567'].map((value) => generateMockPost(value));
-// наполнение миниатюрами контейнера "pictures" на основе данных
-const containerThumbs = document.querySelector('.pictures');
-const thumbsHtml = createThumbnails(mockPosts);
-containerThumbs.append(...thumbsHtml);
-
-
+loadPosts.then((response) => {
+  if (response.ok) {
+    response.json().then((data) => {
+      const containerThumbs = document.querySelector('.pictures');
+      const thumbsHtml = createThumbnails(data);
+      containerThumbs.append(...thumbsHtml);
+    });
+  } else {
+    showError('Данные не удалось загрузить');
+  }
+});

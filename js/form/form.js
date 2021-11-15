@@ -3,10 +3,16 @@ import {
   fieldFileUpload,
   fieldHashtags, filterList,
   formCloseButton,
-  formView, overlay, previewUploadImage, sliderContainer
+  formView,
+  overlay,
+  previewUploadImage,
+  sliderContainer,
+  form
 } from './formNodes.js';
 import {initScaleControls, removeScaleListeners, setScaleControlValue} from './formImageScale.js';
 import {handleChangeFilters, initSlider, removeFiltersListeners} from './formImageFilters.js';
+import {createPosts} from '../api.js';
+import {showError} from '../errors.js';
 
 
 fieldHashtags.addEventListener('input', (event) => {
@@ -60,7 +66,7 @@ fieldFileUpload.addEventListener('change', () => {
   formView.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.body.addEventListener('keydown', handleEscapeKeyPress);
-  sliderContainer.style.visibility='hidden';
+  sliderContainer.style.visibility = 'hidden';
 
   const reader = new FileReader();
   reader.readAsDataURL(fieldFileUpload.files[0]);
@@ -72,6 +78,24 @@ fieldFileUpload.addEventListener('change', () => {
   initSlider();
   filterList.addEventListener('click', handleChangeFilters);
   initScaleControls();
+});
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const formData = new FormData(form);
+  createPosts(formData).then(() => {
+    form.reset();
+    const successMessageTemplate = document.getElementById('success').content.querySelector('.success');
+    const successMessage = successMessageTemplate.cloneNode(true);
+    const successMessageButton = successMessage.querySelector('.success__button');
+    document.body.append(successMessage);
+    successMessageButton.addEventListener('click', () => {
+      successMessage.remove();
+    });
+    closePreview();
+  }).catch((error) => {
+    showError(`Не удалось загрузить изображение : ${error.message}`);
+  });
 });
 
 
