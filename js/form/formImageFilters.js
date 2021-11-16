@@ -1,5 +1,5 @@
 import '/nouislider/nouislider.js';
-import {filterList, slider, previewUploadImage, sliderContainer, sliderValue} from './formNodes.js';
+import {filterListElement, sliderElement, previewUploadImageElement, sliderContainerElement, sliderValueElement} from './formNodes.js';
 
 export const EFFECT_PREFIX = {
   marvin: '%',
@@ -67,15 +67,14 @@ export const EFFECT_FILTERS = {
 
 
 export const initSlider = (options) => {
-  noUiSlider.create(slider, options||DEFAULT_SLIDER_OPTIONS);
+  noUiSlider.create(sliderElement, options||DEFAULT_SLIDER_OPTIONS);
 
-  slider.noUiSlider.on('update',  ()=> {
-    const value = slider.noUiSlider.get();
-    sliderValue.value = value;
-    const effect = previewUploadImage.dataset.effect;
+  sliderElement.noUiSlider.on('update',  ()=> {
+    const value = sliderElement.noUiSlider.get();
+    sliderValueElement.value = value;
+    const effect = previewUploadImageElement.dataset.effect;
     if (effect) {
-      const filter = `${EFFECT_FILTERS[effect]}(${value + (EFFECT_PREFIX[effect] || '')})`;
-      previewUploadImage.style.filter=filter;
+      previewUploadImageElement.style.filter=`${EFFECT_FILTERS[effect]}(${value + (EFFECT_PREFIX[effect] || '')})`;
     }
   });
 };
@@ -83,27 +82,27 @@ export const initSlider = (options) => {
 export const handleChangeFilters = (event) => {
   if (event.target.id) {
 
-    previewUploadImage.removeAttribute('class');
-    previewUploadImage.removeAttribute('data-effect');
-    previewUploadImage.style.filter='';
+    previewUploadImageElement.removeAttribute('class');
+    previewUploadImageElement.removeAttribute('data-effect');
+    previewUploadImageElement.style.filter='';
     const effect = event.target.id.replace('effect-', '');
     if (EFFECT_FILTERS[effect]) {
-      const isSliderVisible=sliderContainer.style.visibility==='visible';
+      const isSliderVisible=sliderContainerElement.style.visibility==='visible';
       if (!isSliderVisible) {
-        sliderContainer.style.visibility='visible';
+        sliderContainerElement.style.visibility='visible';
       }
-      slider.noUiSlider.destroy();
+      sliderElement.noUiSlider.destroy();
       initSlider(getSliderSettingByEffect(effect));
-      previewUploadImage.setAttribute('data-effect', effect);
-      previewUploadImage.setAttribute('class', `effects__preview--${effect}`);
+      previewUploadImageElement.setAttribute('data-effect', effect);
+      previewUploadImageElement.setAttribute('class', `effects__preview--${effect}`);
     } else {
-      sliderContainer.style.visibility='hidden';
+      sliderContainerElement.style.visibility='hidden';
     }
   }
 };
 
 
 export const removeFiltersListeners=()=>{
-  filterList.removeAttribute('click', handleChangeFilters);
-  slider.noUiSlider.destroy();
+  filterListElement.removeAttribute('click', handleChangeFilters);
+  sliderElement.noUiSlider.destroy();
 };
