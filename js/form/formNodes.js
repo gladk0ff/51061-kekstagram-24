@@ -1,6 +1,6 @@
 //scale
-export const scaleControlElementSmallerElement = document.querySelector('.scale__control--smaller');
-export const scaleControlElementBiggerElement = document.querySelector('.scale__control--bigger');
+export const scaleControlSmallerElement = document.querySelector('.scale__control--smaller');
+export const scaleControlBiggerElement = document.querySelector('.scale__control--bigger');
 export const scaleControlElement = document.querySelector('.scale__control--value');
 //form
 export const formViewElement = document.querySelector('.img-upload__overlay');

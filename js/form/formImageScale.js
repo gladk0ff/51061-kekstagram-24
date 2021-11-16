@@ -1,4 +1,4 @@
-import {previewUploadImageElement, scaleControlElement, scaleControlElementBiggerElement, scaleControlElementSmallerElement} from './formNodes.js';
+import {previewUploadImageElement, scaleControlElement, scaleControlBiggerElement, scaleControlSmallerElement} from './formNodes.js';
 
 const SCALE_STEP = 25;
 
@@ -25,11 +25,11 @@ export const scaleDown = () => {
 };
 
 export const removeScaleListeners=()=>{
-  scaleControlElementSmallerElement.removeEventListener('click', scaleDown);
-  scaleControlElementBiggerElement.removeEventListener('click', scaleUp);
+  scaleControlSmallerElement.removeEventListener('click', scaleDown);
+  scaleControlBiggerElement.removeEventListener('click', scaleUp);
 };
 
 export const initScaleControl=()=>{
-  scaleControlElementSmallerElement.addEventListener('click', scaleDown);
-  scaleControlElementBiggerElement.addEventListener('click', scaleUp);
+  scaleControlSmallerElement.addEventListener('click', scaleDown);
+  scaleControlBiggerElement.addEventListener('click', scaleUp);
 };
