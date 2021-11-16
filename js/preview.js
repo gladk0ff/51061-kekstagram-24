@@ -1,17 +1,17 @@
 // Необходимые элементы для работы превью
-const overlay = document.querySelector('.overlay');
+const overlayElement = document.querySelector('.overlay');
 
-const previewContainer = document.querySelector('.big-picture');
-const previewImg = previewContainer.querySelector('.big-picture__img-preview');
-const previewLikes = previewContainer.querySelector('.likes-count');
-const previewCaption = previewContainer.querySelector('.social__caption');
-const previewCommentsCount = previewContainer.querySelector('.comments-count');
-const previewCommentsCountLoaded = previewContainer.querySelector('.comments-count-loaded');
-const previewCloseButton = document.getElementById('picture-cancel');
-const previewCommentsContainer = previewContainer.querySelector('.social__comments');
-const previewCommentsCounter = previewContainer.querySelector('.social__comment-count');
-const previewCommentsLoader = previewContainer.querySelector('.comments-loader');
-const commentTemplate = document.getElementById('social__comment').content;
+const previewContainerElement = document.querySelector('.big-picture');
+const previewImgElement = previewContainerElement.querySelector('.big-picture__img-preview');
+const previewLikesElement = previewContainerElement.querySelector('.likes-count');
+const previewCaptionElement = previewContainerElement.querySelector('.social__caption');
+const previewCommentsCountElement = previewContainerElement.querySelector('.comments-count');
+const previewCommentsCountLoadedElement = previewContainerElement.querySelector('.comments-count-loaded');
+const previewCloseButtonElement = document.getElementById('picture-cancel');
+const previewCommentsContainerElement = previewContainerElement.querySelector('.social__comments');
+const previewCommentsCounterElement = previewContainerElement.querySelector('.social__comment-count');
+const previewCommentsLoaderElement = previewContainerElement.querySelector('.comments-loader');
+const commentTemplateElement = document.getElementById('social__comment').content;
 
 
 let commentData = null;
@@ -36,7 +36,7 @@ const generateCommentData=(comments)=>{
  * @return HTMLElement[]
  * */
 const createComments = (comments) => comments.map((comment) => {
-  const commentHTML = commentTemplate.cloneNode(true);
+  const commentHTML = commentTemplateElement.cloneNode(true);
 
   const avatar = commentHTML.querySelector('.social__picture');
   avatar.src = comment.avatar;
@@ -57,8 +57,8 @@ const loadPartComments=()=>{
   const endIndex =startIndex + newPartLength;
   const commentArray = commentData.data.slice(startIndex,endIndex);
   const commentsHTML = createComments(commentArray);
-  previewCommentsContainer.append(...commentsHTML);
-  previewCommentsCountLoaded.textContent = endIndex;
+  previewCommentsContainerElement.append(...commentsHTML);
+  previewCommentsCountLoadedElement.textContent = endIndex;
   commentData.hasLoaded = endIndex;
   /**
    * если загружены все :
@@ -67,17 +67,17 @@ const loadPartComments=()=>{
    * -удаляем обработчик загрузки
    */
   if (commentData.hasLoaded===commentData.length){
-    previewCommentsLoader.removeEventListener('click',loadPartComments);
+    previewCommentsLoaderElement.removeEventListener('click',loadPartComments);
     commentData=null;
-    previewCommentsLoader.classList.add('hidden');
+    previewCommentsLoaderElement.classList.add('hidden');
   }
 };
 
 const closePreview = () => {
-  overlay.classList.add('hidden');
+  overlayElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  previewCommentsLoader.removeEventListener('click',loadPartComments);
-  previewCommentsContainer.innerHTML = '';
+  previewCommentsLoaderElement.removeEventListener('click',loadPartComments);
+  previewCommentsContainerElement.innerHTML = '';
 };
 
 const handleEscapeKeyPress = (e) => {
@@ -87,13 +87,13 @@ const handleEscapeKeyPress = (e) => {
   document.body.removeEventListener('keydown', handleEscapeKeyPress);
 };
 
-overlay.addEventListener('click', (event) => {
+overlayElement.addEventListener('click', (event) => {
   event.stopPropagation();
-  if (event.target === overlay) {
+  if (event.target === overlayElement) {
     closePreview();
   }
 });
-previewCloseButton.addEventListener('click', closePreview);
+previewCloseButtonElement.addEventListener('click', closePreview);
 
 
 /**
@@ -103,21 +103,21 @@ previewCloseButton.addEventListener('click', closePreview);
  * @param postData - данные о посте
  * */
 export const showPreview = (postData) => () => {
-  previewContainer.classList.remove('hidden');
-  previewCommentsCounter.classList.remove('hidden');
-  previewCommentsLoader.classList.remove('hidden');
-  previewCommentsContainer.innerHTML = '';
+  previewContainerElement.classList.remove('hidden');
+  previewCommentsCounterElement.classList.remove('hidden');
+  previewCommentsLoaderElement.classList.remove('hidden');
+  previewCommentsContainerElement.innerHTML = '';
 
   generateCommentData(postData.comments);
 
-  previewCommentsCount.textContent = commentData.length;
-  previewCommentsLoader.addEventListener('click',loadPartComments);
-  previewCommentsLoader.click();
+  previewCommentsCountElement.textContent = commentData.length;
+  previewCommentsLoaderElement.addEventListener('click',loadPartComments);
+  previewCommentsLoaderElement.click();
 
   document.body.classList.add('modal-open');
   document.body.addEventListener('keydown', handleEscapeKeyPress);
 
-  previewImg.src = postData.url;
-  previewLikes.textContent = postData.likes;
-  previewCaption.textContent = postData.likes;
+  previewImgElement.src = postData.url;
+  previewLikesElement.textContent = postData.likes;
+  previewCaptionElement.textContent = postData.likes;
 };

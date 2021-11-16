@@ -1,14 +1,14 @@
-import {previewUploadImage, scaleControl, scaleControlBigger, scaleControlSmaller} from './formNodes.js';
+import {previewUploadImageElement, scaleControlElement, scaleControlElementBiggerElement, scaleControlElementSmallerElement} from './formNodes.js';
 
 const SCALE_STEP = 25;
 
 export const setScaleControlValue = (scale) => {
-  scaleControl.value = `${scale}%`;
-  previewUploadImage.style.transform = `scale(${scaleControl.value})`;
+  scaleControlElement.value = `${scale}%`;
+  previewUploadImageElement.style.transform = `scale(${scaleControlElement.value})`;
 };
 
 export const changeImageScale = (value) => {
-  let scale = +scaleControl.value.slice(0, -1);
+  let scale = +scaleControlElement.value.slice(0, -1);
   scale += (SCALE_STEP * value);
   if (25 > scale || scale > 100) {
     return;
@@ -25,11 +25,11 @@ export const scaleDown = () => {
 };
 
 export const removeScaleListeners=()=>{
-  scaleControlSmaller.removeEventListener('click', scaleDown);
-  scaleControlBigger.removeEventListener('click', scaleUp);
+  scaleControlElementSmallerElement.removeEventListener('click', scaleDown);
+  scaleControlElementBiggerElement.removeEventListener('click', scaleUp);
 };
 
-export const initScaleControls=()=>{
-  scaleControlSmaller.addEventListener('click', scaleDown);
-  scaleControlBigger.addEventListener('click', scaleUp);
+export const initScaleControl=()=>{
+  scaleControlElementSmallerElement.addEventListener('click', scaleDown);
+  scaleControlElementBiggerElement.addEventListener('click', scaleUp);
 };

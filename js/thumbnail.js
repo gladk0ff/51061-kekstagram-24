@@ -6,9 +6,9 @@ import { showPreview } from './preview.js';
  * @return HTMLElement[] - массив элементов в соответствии с <template id="picture">
  * */
 export const createThumbnails = (posts) => {
-  const thumbTamplate = document.getElementById('picture').content.querySelector('.picture');
+  const thumbTemplateElement = document.getElementById('picture').content.querySelector('.picture');
   return posts.map((post) => {
-    const thumb = thumbTamplate.cloneNode(true);
+    const thumb = thumbTemplateElement.cloneNode(true);
     thumb.addEventListener('click', showPreview(post));
 
     const img = thumb.querySelector('.picture__img');

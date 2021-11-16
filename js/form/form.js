@@ -1,21 +1,21 @@
 import {
-  fieldComment,
-  fieldFileUpload,
-  fieldHashtags, filterList,
-  formCloseButton,
-  formView,
-  overlay,
-  previewUploadImage,
-  sliderContainer,
-  form
+  fieldCommentElement,
+  fieldFileUploadElement,
+  fieldHashtagsElement, filterListElement,
+  formCloseButtonElement,
+  formViewElement,
+  overlayElement,
+  previewUploadImageElement,
+  sliderContainerElement,
+  formElement
 } from './formNodes.js';
-import {initScaleControls, removeScaleListeners, setScaleControlValue} from './formImageScale.js';
+import {initScaleControl, removeScaleListeners, setScaleControlValue} from './formImageScale.js';
 import {handleChangeFilters, initSlider, removeFiltersListeners} from './formImageFilters.js';
-import {createPosts} from '../api.js';
+import {createPost} from '../api.js';
 import {showError} from '../errors.js';
 
 
-fieldHashtags.addEventListener('input', (event) => {
+fieldHashtagsElement.addEventListener('input', (event) => {
   const input = event.target;
   const value = input.value;
   input.setCustomValidity('');
@@ -36,24 +36,24 @@ fieldHashtags.addEventListener('input', (event) => {
 });
 
 const closePreview = () => {
-  formView.classList.add('hidden');
-  fieldFileUpload.value = null;
+  formViewElement.classList.add('hidden');
+  fieldFileUploadElement.value = null;
   document.body.classList.remove('modal-open');
   removeScaleListeners();
   removeFiltersListeners();
 };
 
-formCloseButton.addEventListener('click', closePreview);
-overlay.addEventListener('click', (event) => {
+formCloseButtonElement.addEventListener('click', closePreview);
+overlayElement.addEventListener('click', (event) => {
   event.stopPropagation();
-  if (event.target === overlay) {
+  if (event.target === overlayElement) {
     closePreview();
   }
 });
 
 const handleEscapeKeyPress = (e) => {
-  if (e.target === fieldHashtags
-    || e.target === fieldComment) {
+  if (e.target === fieldHashtagsElement
+    || e.target === fieldCommentElement) {
     return;
   }
   if (e.key === 'Escape') {
@@ -62,29 +62,29 @@ const handleEscapeKeyPress = (e) => {
   document.body.removeEventListener('keydown', handleEscapeKeyPress);
 };
 
-fieldFileUpload.addEventListener('change', () => {
-  formView.classList.remove('hidden');
+fieldFileUploadElement.addEventListener('change', () => {
+  formViewElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.body.addEventListener('keydown', handleEscapeKeyPress);
-  sliderContainer.style.visibility = 'hidden';
+  sliderContainerElement.style.visibility = 'hidden';
 
   const reader = new FileReader();
-  reader.readAsDataURL(fieldFileUpload.files[0]);
+  reader.readAsDataURL(fieldFileUploadElement.files[0]);
   reader.onload = () => {
-    previewUploadImage.src = reader.result;
+    previewUploadImageElement.src = reader.result;
     setScaleControlValue(100);
   };
 
   initSlider();
-  filterList.addEventListener('click', handleChangeFilters);
-  initScaleControls();
+  filterListElement.addEventListener('click', handleChangeFilters);
+  initScaleControl();
 });
 
-form.addEventListener('submit', (event) => {
+formElement.addEventListener('submit', (event) => {
   event.preventDefault();
-  const formData = new FormData(form);
-  createPosts(formData).then(() => {
-    form.reset();
+  const formData = new FormData(formElement);
+  createPost(formData).then(() => {
+    formElement.reset();
     const successMessageTemplate = document.getElementById('success').content.querySelector('.success');
     const successMessage = successMessageTemplate.cloneNode(true);
     const successMessageButton = successMessage.querySelector('.success__button');
